@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;mesname&apos; in &apos;org.generation.SeasonUsingSwitch.main(...)&apos; to &apos;mesName&apos;&#x0D;&#x0A;- Original project: &apos;java05_control_flow&apos;&#x0D;&#x0A;- Original element: &apos;org.generation.SeasonUsingSwitch.main(String[]).mesname&apos;&#x0D;&#x0A;- Renamed element: &apos;mesname&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;mesname&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;org.generation{SeasonUsingSwitch.java[SeasonUsingSwitch~main~\[QString;@mesname!328!342!335!341!QString;!0!false" name="mesName" references="true" stamp="1740077435044" version="1.0"/>
+</session>
