@@ -3,14 +3,24 @@ package com.ecommerce.app.repository;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.ecommerce.app.model.Customer;
 
 /**
- * La especificación de JPA es una especificación estándar de Java que define
- * una interfaz común y un conjunto de reglas para el mapeo objeto-relacional y
- * la gestión de entidades en aplicaciones Java.
+ * La especificación de JPA (Java Persistence API) es una especificación estándar 
+ * de Java que defineuna interfaz común y un conjunto de reglas para el 
+ * mapeo objeto-relacional(ORM) y la gestión de entidades en aplicaciones Java.
+ * 
+ * JPA permite a los desarrolladores trabajar con bases de datos utilizando 
+ * objetos Java, eliminando la necesidad de escribir consultas SQL 
+ * directamente y proporcionando un enfoque orientado a objetos 
+ * para la persistencia de datos. JPA define un conjunto de reglas 
+ * y contratos para trabajar con bases de datos, pero no proporciona 
+ * una implementación concreta.
  * 
  * Varios proveedores de tecnología, como Hibernate, EclipseLink, Apache
  * OpenJPA, entre otros, implementan la especificación de JPA y proporcionan las
@@ -31,15 +41,19 @@ import com.ecommerce.app.model.Customer;
  * consulta llamado Hibernate Query Language (HQL), similar a SQL pero orientado
  * a objetos.
  * 
- * CrudRepository es una interfaz básica que proporciona métodos CRUD estándar,
- * mientras que JpaRepository es una interfaz extendida de CrudRepository que
- * agrega funcionalidades específicas de JPA. Si estás utilizando JPA en tu
- * aplicación de Spring y necesitas características adicionales como consultas
- * personalizadas o paginación, es recomendable utilizar JpaRepository. Sin
- * embargo, si solo necesitas las operaciones CRUD básicas, CrudRepository puede
- * ser suficiente.
+ * CrudRepository es una interfaz básica que proporciona métodos CRUD estándar.
+ * Si necesitas características adicionales como consultas paginación, 
+ * es recomendable utilizar la interfaz PagingAndSortingepository. 
+ * 
+ * ¿Cuál usar? 
+ * - CrudRepository: Si solo necesitas operaciones CRUD básicas 
+ *   sin requerir paginación ni ordenación.
+ * - PagingAndSortingRepository: Si necesitas paginación y ordenación 
+ *   de los resultados sin necesidad de funcionalidades avanzadas de JPA.
+ * - JpaRepository: Necesitas funcionalidades avanzadas como la gestión 
+ *   de transacciones, flush o la eliminación de entidades en lotes.
  */
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
+public interface CustomerRepository extends CrudRepository<Customer, Long>, PagingAndSortingRepository<Customer, Long> {
 	
 	/*
 	 * Los query methods se refieren a métodos definidos en las 
@@ -69,7 +83,8 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	 * y evita errores de NullPointerException 
 	 */
 	Optional< Customer > findByEmail(String email);
-	Set<Customer> findAllByActiveTrue();
-	Set<Customer> findAllByActiveFalse();
+
+	Page<Customer> findAllByActiveTrue(Pageable pageable);
+	Page<Customer> findAllByActiveFalse(Pageable pageable);
 
 }

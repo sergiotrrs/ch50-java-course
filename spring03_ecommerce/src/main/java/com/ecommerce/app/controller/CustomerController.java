@@ -1,7 +1,7 @@
 package com.ecommerce.app.controller;
 
-import java.util.Set;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -57,14 +57,24 @@ public class CustomerController {
 	 * utilizarse para pasar datos adicionales en las solicitudes GET.
 	 */
 	@GetMapping // http:localhost:8080/api/v1/customers?active=false&size=10&firstname="Estafany"
-	Set<Customer> getAllUsers(
+	Page<Customer> getAllUsers(
 			@RequestParam(
 					name="active", 
 					required = false,
 					defaultValue = "true"
-					) boolean active  
+					) boolean isActive,
+			@RequestParam(
+					name="size", 
+					required = false,
+					defaultValue = "5"
+					) int pageSize,
+			@RequestParam(
+					name="page", 
+					required = false,
+					defaultValue = "0"
+					) int pageNumber
 			){
-		return customerService.getAllUsers(active);
+		return customerService.getAllUsers(isActive, pageNumber, pageSize);
 	}
 	
 	/**

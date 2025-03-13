@@ -2,8 +2,9 @@ package com.ecommerce.app.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.app.model.Customer;
@@ -91,12 +92,13 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Set<Customer> getAllUsers(boolean isActive) {
-		Set<Customer> customers;
+	public Page<Customer> getAllUsers(boolean isActive, int pageNumber, int pageSize) {
+		Page<Customer> customers;
+		PageRequest pageAndSize = PageRequest.of(pageNumber, pageSize);
 		if( isActive ) {
-			customers = customerRepository.findAllByActiveTrue();
+			customers = customerRepository.findAllByActiveTrue(pageAndSize);
 		} else {
-			customers = customerRepository.findAllByActiveFalse();
+			customers = customerRepository.findAllByActiveFalse(pageAndSize);
 		}
 		return customers;
 	}

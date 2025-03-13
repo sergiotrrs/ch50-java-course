@@ -1,6 +1,7 @@
 package com.ecommerce.app.service;
 
-import java.util.Set;
+
+import org.springframework.data.domain.Page;
 
 import com.ecommerce.app.model.Customer;
 
@@ -24,7 +25,7 @@ public interface CustomerService {
 	Customer createCustomer(Customer customer);
 	Customer getCustomerById(Long id);
 	Customer getCustomerByEmail(String email);
-	Set<Customer> getAllUsers(boolean isActive);
+	Page<Customer> getAllUsers(boolean isActive, int pageNumber, int pageSize);
 	Customer updateCustomer(Customer customer, Long id);
 	void deleteCustomer(Long id);
 }
