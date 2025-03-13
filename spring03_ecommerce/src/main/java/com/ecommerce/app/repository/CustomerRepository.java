@@ -43,7 +43,7 @@ import com.ecommerce.app.model.Customer;
  * 
  * CrudRepository es una interfaz básica que proporciona métodos CRUD estándar.
  * Si necesitas características adicionales como consultas paginación, 
- * es recomendable utilizar la interfaz PagingAndSortingepository. 
+ * es recomendable utilizar la interfaz PagingAndSortingRepository. 
  * 
  * ¿Cuál usar? 
  * - CrudRepository: Si solo necesitas operaciones CRUD básicas 

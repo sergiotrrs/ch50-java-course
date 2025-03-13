@@ -6,6 +6,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.ecommerce.app.model.Customer;
+import com.ecommerce.app.repository.CustomerRepository;
 import com.ecommerce.app.service.CustomerService;
 
 /**
@@ -24,11 +25,24 @@ import com.ecommerce.app.service.CustomerService;
 public class CustomerDataLoader implements CommandLineRunner {
 	
 	@Autowired
-	CustomerService cS;
+	CustomerRepository customerRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
 		
+		customerRepository.save(new Customer("Ale", "Ordaz", "ale@gmail.com", "12345678") );
+		customerRepository.save(new Customer("Vale", "Aceves", "vale@gmail.com", "12345678"));
+		customerRepository.save(new Customer("Ana", "Cruz", "ana@gmail.com", "12345678"));
+		customerRepository.save(new Customer("Andy", "Eunice", "andy@gmail.com", "12345678"));
+		customerRepository.save(new Customer("Kati", "Sandoval", "kati@gmail.com", "12345678"));
+		customerRepository.save(new Customer("Aure", "Robles", "aure@gmail.com", "12345678"));
+		customerRepository.save(new Customer("Fri", "González", "fri@gmail.com", "12345678"));
+		customerRepository.save(new Customer("Eri", "González", "eri@gmail.com", "12345678"));
+		customerRepository.save(new Customer("José", "Meza", "jose@gmail.com", "12345678"));
+		customerRepository.save(new Customer("Alan", "Flores", "alan@gmail.com", "12345678"));
+		customerRepository.save(new Customer("Ferchis", "Hernández", "ferchis@gmail.com", "12345678"));
+		
+		/*
 		cS.createCustomer(new Customer("Jack", "Bauer", "jack@gmail.com", "12345678"));
 		cS.createCustomer(new Customer("Chloe", "O'Brian", "chloe@gmail.com", "87654321"));
 		cS.createCustomer(new Customer("Tony", "Almeida", "tony@gmail.com", "23456789"));
@@ -39,7 +53,7 @@ public class CustomerDataLoader implements CommandLineRunner {
 		cS.createCustomer(new Customer("Nina", "Myers", "nina@gmail.com", "78912345"));
 		cS.createCustomer(new Customer("Bill", "Buchanan", "bill@gmail.com", "89123456"));
 		cS.createCustomer(new Customer("Mike", "Novick", "mike@gmail.com", "91234567"));
-		
+		*/
 	}
 
 }
