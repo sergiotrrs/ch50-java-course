@@ -1,5 +1,9 @@
 package com.ecommerce.app.util;
 
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -26,6 +30,14 @@ public class CustomerDataLoader implements CommandLineRunner {
 	
 	@Autowired
 	CustomerRepository customerRepository;
+	
+	/**
+	 *  - Logger permite definir niveles( TRACE, DEBBUG, INFO, WARN, ERROR).
+	 *  - Redirigir el log a archivos, bases de datos o consola.
+	 *  - Personalizar el formato.
+	 *  - Se integra mejor con otras herramientas para un monitoreo avanzado
+	 */
+	private static final Logger log = LoggerFactory.getLogger( CustomerDataLoader.class );
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -41,6 +53,17 @@ public class CustomerDataLoader implements CommandLineRunner {
 		customerRepository.save(new Customer("José", "Meza", "jose@gmail.com", "12345678"));
 		customerRepository.save(new Customer("Alan", "Flores", "alan@gmail.com", "12345678"));
 		customerRepository.save(new Customer("Ferchis", "Hernández", "ferchis@gmail.com", "12345678"));
+		
+		// Obtener el cliente con ID 3
+		Optional<Customer> optionalCustomer  = customerRepository.findById( 100L );
+		
+		if( optionalCustomer.isPresent() ) {
+			Customer existingCustomer = optionalCustomer.get();
+			log.info( existingCustomer.toString() );
+		} else {
+			log.warn("No existe el cliente con ID indicado");
+		}
+		
 		
 		/*
 		cS.createCustomer(new Customer("Jack", "Bauer", "jack@gmail.com", "12345678"));

@@ -74,8 +74,9 @@ public interface CustomerRepository extends CrudRepository<Customer, Long>, Pagi
 	 *  - Evita duplicados
 	 *  - Mejor rendimiento en búsquedas
 	 */
-	Set<Customer> findByLastName(String lastname);
-	Set<Customer> findByFirstName(String firstname);
+	Set<Customer> findByLastName(String lastName);
+	Customer findByLastNameAndFirstName(String lastName, String firstName);
+	Set<Customer> findByFirstName(String firstName);
 	
 	/**
 	 * Optional<T> es una clase de Java 8 (paquete java.util) 
@@ -83,6 +84,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long>, Pagi
 	 * y evita errores de NullPointerException 
 	 */
 	Optional< Customer > findByEmail(String email);
+	Customer findByEmailAndFirstName(String email, String firstName );
 
 	Page<Customer> findAllByActiveTrue(Pageable pageable);
 	Page<Customer> findAllByActiveFalse(Pageable pageable);

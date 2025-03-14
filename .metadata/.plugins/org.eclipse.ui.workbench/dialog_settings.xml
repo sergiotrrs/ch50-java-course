@@ -25,7 +25,6 @@
 		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.buildship.ui.wizards.project.import"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.buildship.ui.importwizards"/>
-			<item value="org.eclipse.m2e"/>
 		</list>
 		<section name="ImportExportWizard.dialogBounds">
 		</section>
