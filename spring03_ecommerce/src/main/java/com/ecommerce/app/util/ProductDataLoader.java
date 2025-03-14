@@ -1,5 +1,9 @@
 package com.ecommerce.app.util;
 
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -15,6 +19,8 @@ public class ProductDataLoader implements CommandLineRunner {
     @Autowired 
     ProductRepository productRepository;
     
+    private static final Logger log = LoggerFactory.getLogger( ProductDataLoader.class );
+    
     @Override
     public void run(String... args) throws Exception {
         productRepository.save(new Product(null, "jabón", "Con su aroma delicioso, como el amor de mamá", 25.0));
@@ -29,6 +35,14 @@ public class ProductDataLoader implements CommandLineRunner {
 		productRepository.save(new Product("Pasta Barilla", "Pasta spaghetti 500g", 30.0));
 		
 		// Obtener el registro con ID 3
+		Optional<Product> product= productRepository.findById(3L);// retorna un tipo optional de product
+		
+		if (product.isPresent()) {
+			Product existingProduct = product.get();
+			log.info(existingProduct.toString());
+		} else {
+			log.warn("No existe el producto con ID indicado");
+		}
 		
 		
     }
