@@ -10,6 +10,6 @@ import com.ecommerce.app.model.Role;
 public interface RoleRepository extends CrudRepository<Role, Long>, PagingAndSortingRepository<Role, Long> {
     
     Optional<Role> findByName(String name);
-    Set<Role> findByDescription(String description);
+    Set<Role> findByDescriptionContaining(String description);
     
 }
