@@ -8,7 +8,7 @@
 		</list>
 		<section name="NewWizard.dialogBounds">
 			<item key="DIALOG_X_ORIGIN" value="262"/>
-			<item key="DIALOG_Y_ORIGIN" value="-21"/>
+			<item key="DIALOG_Y_ORIGIN" value="4"/>
 			<item key="DIALOG_WIDTH" value="500"/>
 			<item key="DIALOG_HEIGHT" value="500"/>
 			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
@@ -27,6 +27,11 @@
 			<item value="org.eclipse.buildship.ui.importwizards"/>
 		</list>
 		<section name="ImportExportWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="330"/>
+			<item key="DIALOG_Y_ORIGIN" value="4"/>
+			<item key="DIALOG_WIDTH" value="470"/>
+			<item key="DIALOG_HEIGHT" value="516"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 		</section>
 	</section>
 </section>

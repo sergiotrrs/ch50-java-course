@@ -9,4 +9,5 @@
     <fullyQualifiedTypeName name="com.zoo.Cat"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.PageRequest"/>
     <fullyQualifiedTypeName name="com.ecommerce.app.model.Customer"/>
+    <fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
 </qualifiedTypeNameHistroy>

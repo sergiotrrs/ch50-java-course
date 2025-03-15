@@ -3,13 +3,17 @@ package com.ecommerce.app.controller.impl;
 import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.app.controller.ProductController;
 import com.ecommerce.app.model.Product;
 import com.ecommerce.app.service.ProductService;
 
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/v1/products")
 @RestController
 public class ProductControllerImpl implements ProductController {
 
