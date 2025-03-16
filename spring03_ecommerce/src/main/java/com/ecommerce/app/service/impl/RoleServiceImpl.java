@@ -3,13 +3,11 @@ package com.ecommerce.app.service.impl;
 import java.util.Optional;
 import java.util.Set;
 
-import org.springframework.stereotype.Service;
-
 import com.ecommerce.app.model.Role;
 import com.ecommerce.app.repository.RoleRepository;
 import com.ecommerce.app.service.RoleService;
 
-@Service
+
 public class RoleServiceImpl implements RoleService {
 	
 	private final RoleRepository roleRepository;
@@ -32,26 +30,27 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public Role getRoleByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Role> existingRole = roleRepository.findByName(name);
+		return existingRole.orElseThrow( ()-> new IllegalStateException("Role does not exist with name " + name) );
 	}
 
 	@Override
 	public Set<Role> getAllRoles() {
-		// TODO Auto-generated method stub
-		return null;
+		return (Set<Role>) roleRepository.findAll();
 	}
 
 	@Override
-	public Role updateRole(Role product, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Role updateRole(Role role, Long id) {
+		Role existingRole = getRoleById(id);
+		existingRole.setName( role.getName() );
+		existingRole.setDescription( role.getDescription() );
+		return roleRepository.save(existingRole);
 	}
 
 	@Override
 	public void deleteRole(Long id) {
-		// TODO Auto-generated method stub
-		
+		Role existingRole = getRoleById(id);
+		roleRepository.delete(existingRole);
 	}
 
 }

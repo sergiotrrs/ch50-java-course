@@ -5,42 +5,46 @@ import java.util.Set;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.ecommerce.app.controller.RoleController;
 import com.ecommerce.app.model.Role;
+import com.ecommerce.app.service.RoleService;
 
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/roles")
 public class RoleControllerImpl implements RoleController {
 
+	private final RoleService roleService;
+
+	public RoleControllerImpl(RoleService roleService) {
+		this.roleService = roleService;
+	}
+
 	@Override
 	public ResponseEntity<Role> getRoleById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return ResponseEntity.ok(roleService.getRoleById(id));
 	}
 
 	@Override
 	public ResponseEntity<Set<Role>> getAllRoles() {
-		// TODO Auto-generated method stub
-		return null;
+		return ResponseEntity.ok(roleService.getAllRoles());
 	}
 
 	@Override
 	public ResponseEntity<Role> createRole(Role newRole) {
-		// TODO Auto-generated method stub
-		return null;
+		return ResponseEntity.status(201).body(roleService.createRole(newRole));
 	}
 
 	@Override
 	public ResponseEntity<Role> updateRole(Role role, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return ResponseEntity.ok(roleService.updateRole(role, id));
 	}
 
 	@Override
 	public ResponseEntity<Void> deleteRole(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		roleService.deleteRole(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }
