@@ -1,13 +1,16 @@
 package com.ecommerce.app.service.impl;
 
+
 import java.util.Optional;
-import java.util.Set;
+
+
+import org.springframework.stereotype.Service;
 
 import com.ecommerce.app.model.Role;
 import com.ecommerce.app.repository.RoleRepository;
 import com.ecommerce.app.service.RoleService;
 
-
+@Service
 public class RoleServiceImpl implements RoleService {
 	
 	private final RoleRepository roleRepository;
@@ -35,8 +38,8 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public Set<Role> getAllRoles() {
-		return (Set<Role>) roleRepository.findAll();
+	public Iterable<Role> getAllRoles() {
+		return roleRepository.findAll() ;
 	}
 
 	@Override

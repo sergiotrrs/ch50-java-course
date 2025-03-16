@@ -2,14 +2,17 @@ package com.ecommerce.app.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.app.model.Customer;
+import com.ecommerce.app.model.Role;
 import com.ecommerce.app.repository.CustomerRepository;
 import com.ecommerce.app.service.CustomerService;
+import com.ecommerce.app.service.RoleService;
 
 /**
  * La inyección de dependencias es un patrón de diseño que permite la creación
@@ -44,6 +47,7 @@ import com.ecommerce.app.service.CustomerService;
 public class CustomerServiceImpl implements CustomerService {
 	
 	private final CustomerRepository customerRepository;
+	private final RoleService roleService;
 	
 	/**
 	 * En spring Boot se puede inyectar dependencia s de dos formas:
@@ -53,8 +57,9 @@ public class CustomerServiceImpl implements CustomerService {
 	 *   usar Autowired es opcional.
 	 *   Ventajas: Facilita la prueba unitaria y permite objetos inmutables.
 	 */
-	public CustomerServiceImpl(CustomerRepository customerRepository) {
+	public CustomerServiceImpl(CustomerRepository customerRepository, RoleService roleService) {
 		this.customerRepository = customerRepository;
+		this.roleService = roleService;
 	}
 
 	@Override
@@ -67,9 +72,15 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setId(null); // forzar la creación del cliente	
 		customer.setActive(true); // activar cliente
 		customer.setCreatedAt(LocalDateTime.now());
-		// TODO asignar el ROL de cliente
 		Customer newCustomer = customerRepository.save( customer );
 		return newCustomer;
+	}
+	
+	@Override
+	public Customer createCustomer(Customer customer, String roleName) {
+		Role role = roleService.getRoleByName(roleName);
+		customer.setRoles( Set.of(role) );
+		return createCustomer( customer );
 	}
 
 	@Override

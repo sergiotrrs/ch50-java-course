@@ -23,6 +23,7 @@ import com.ecommerce.app.model.Customer;
 public interface CustomerService {
 	 
 	Customer createCustomer(Customer customer);
+	Customer createCustomer(Customer customer, String roleName);
 	Customer getCustomerById(Long id);
 	Customer getCustomerByEmail(String email);
 	Page<Customer> getAllUsers(boolean isActive, int pageNumber, int pageSize);

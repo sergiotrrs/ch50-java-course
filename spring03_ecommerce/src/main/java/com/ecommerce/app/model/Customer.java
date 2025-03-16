@@ -2,12 +2,16 @@ package com.ecommerce.app.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -41,6 +45,27 @@ public class Customer {
 	private LocalDate birthDate;
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
+	
+    /**
+     * Define una relación muchos a muchos entre la entidad 
+     * Customer y la entidad Role.
+     * Un cliente puede tener múltiples roles y un rol puede 
+     * pertenecer a múltiples clientes.
+     * 
+     * La relación se gestiona mediante una tabla intermedia 
+     * llamada "customer_has_role".
+     * - La columna "customer_id" en la tabla intermedia 
+     *   referencia a la entidad Customer.
+     * - La columna "role_id" en la tabla intermedia 
+     *   referencia a la entidad Role.
+     */
+	@ManyToMany() // Indica la relación entre tablas
+	@JoinTable( // Define la tabla intermedia
+			name="customer_has_role", // nombre de tabla intermedia
+			joinColumns = @JoinColumn(name = "customer_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id")			
+			)
+	private Set<Role> roles; // Colecciones de roles de un cliente
 
 	Customer() {
 	}
@@ -114,6 +139,14 @@ public class Customer {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+		
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 	@Override

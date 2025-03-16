@@ -1,7 +1,5 @@
 package com.ecommerce.app.controller.impl;
 
-import java.util.Set;
-
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import com.ecommerce.app.controller.RoleController;
@@ -10,6 +8,7 @@ import com.ecommerce.app.service.RoleService;
 
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/roles")
+@RestController
 public class RoleControllerImpl implements RoleController {
 
 	private final RoleService roleService;
@@ -26,7 +25,7 @@ public class RoleControllerImpl implements RoleController {
 
 	@Override
 	@GetMapping
-	public ResponseEntity<Set<Role>> getAllRoles() {
+	public ResponseEntity<Iterable<Role>> getAllRoles() {
 		return ResponseEntity.ok(roleService.getAllRoles());
 	}
 

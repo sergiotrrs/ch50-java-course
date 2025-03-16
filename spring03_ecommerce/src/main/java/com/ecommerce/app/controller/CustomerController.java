@@ -94,12 +94,11 @@ public class CustomerController {
 	 */
 	@PostMapping // http:localhost:8080/api/v1/customers
 	ResponseEntity<Customer> createCustomer(@RequestBody Customer newCustomer) {
-	   Customer registeredCustomer = customerService.createCustomer(newCustomer);
+	   Customer registeredCustomer = customerService.createCustomer(newCustomer, "CUSTOMER");
 	   //return new ResponseEntity<>(registeredCustomer, HttpStatus.CREATED);
 	   return ResponseEntity.status(201).body(registeredCustomer);
 	}
-	
-	
+		
 	@PutMapping("{id}") // http:localhost:8080/api/v1/customers/{id}
 	ResponseEntity<Customer> updateCustomer(@PathVariable("id") Long id ,@RequestBody Customer customer) {
 		Customer updatedCustomer = customerService.updateCustomer(customer, id);
