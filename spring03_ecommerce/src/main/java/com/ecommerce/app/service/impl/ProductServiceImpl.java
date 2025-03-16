@@ -1,5 +1,7 @@
 package com.ecommerce.app.service.impl;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.data.domain.Page;
@@ -56,7 +58,28 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Set<Product> getAllProducts() {
-		return (Set<Product>) productRepository.findAll();
+		/*
+		 *  roleRepository.findAll() devuelve un Iterable<Role>, 
+		 *  pero no sabemos qué implementación exacta está usando. 
+		 *  Puede ser un List<Role>, un Set<Role>, o incluso una 
+		 *  implementación propia de Iterable.
+		 *  
+		 *  Set<Role> roleSet = (Set<Role>) roleIterable;
+		 *  es un cast inválido porque roleIterable puede ser un 
+		 *  List<Role> en la práctica. Como List y Set son tipos 
+		 *  incompatibles, Java lanza un ClassCastException.
+		 *  
+		 *  Para convertir un Iterable<T> en un Set<T>, no puedes 
+		 *  hacer un cast directo, sino que debes extraer 
+		 *  los elementos y construir un Set explícitamente
+		 * 
+		 *  Lo anterior es necesario por que el método se especificó
+		 *  con el retorno de Set<Product>. Si se hubiera
+		 *  especificado como Iterable<Product> no sería
+		 *  necesario las siguientes expresiones:
+		 */
+		Iterable<Product> productsIterable = productRepository.findAll();
+		return new LinkedHashSet<>( (Collection<Product>)productsIterable  );
 	}
 
 	@Override

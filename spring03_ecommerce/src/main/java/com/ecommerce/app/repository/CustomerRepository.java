@@ -1,7 +1,6 @@
 package com.ecommerce.app.repository;
 
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -69,14 +68,9 @@ public interface CustomerRepository extends CrudRepository<Customer, Long>, Pagi
 	 * 
 	 */
 	
-	/**
-	 * Razones para usar Set en lugar de List:
-	 *  - Evita duplicados
-	 *  - Mejor rendimiento en búsquedas
-	 */
-	Set<Customer> findByLastName(String lastName);
+	Iterable<Customer> findByLastName(String lastName);
 	Customer findByLastNameAndFirstName(String lastName, String firstName);
-	Set<Customer> findByFirstName(String firstName);
+	Iterable<Customer> findByFirstName(String firstName);
 	
 	/**
 	 * Optional<T> es una clase de Java 8 (paquete java.util) 
