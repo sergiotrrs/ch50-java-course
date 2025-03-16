@@ -1,5 +1,0 @@
-package org.generation.app.service;
-
-public interface UserService {
-
-}
