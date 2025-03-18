@@ -80,6 +80,7 @@ public class ProductServiceImpl implements ProductService {
 		 */
 		Iterable<Product> productsIterable = productRepository.findAll();
 		return new LinkedHashSet<>( (Collection<Product>)productsIterable  );
+
 	}
 
 	@Override
