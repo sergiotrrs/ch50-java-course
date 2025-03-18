@@ -15,7 +15,7 @@ import com.ecommerce.app.repository.ProductRepository;
 
 @Component
 @Order(2)
-@Profile("devH2") // Para que se active cuando se use el perfil indicado
+@Profile("loaderH2") // Para que se active cuando se use el perfil indicado
 public class ProductDataLoader implements CommandLineRunner {
 
     @Autowired 
