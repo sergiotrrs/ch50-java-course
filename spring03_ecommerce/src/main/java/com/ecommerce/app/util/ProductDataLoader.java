@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import com.ecommerce.app.repository.ProductRepository;
 
 @Component
 @Order(2)
+@Profile("devH2") // Para que se active cuando se use el perfil indicado
 public class ProductDataLoader implements CommandLineRunner {
 
     @Autowired 

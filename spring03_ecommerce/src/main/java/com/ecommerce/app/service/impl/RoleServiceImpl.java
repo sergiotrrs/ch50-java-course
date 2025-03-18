@@ -22,6 +22,7 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Role createRole(Role role) {
 		role.setId(null);
+		role.setName( role.getName().toUpperCase() );
 		return roleRepository.save(role);
 	}
 
@@ -45,7 +46,7 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Role updateRole(Role role, Long id) {
 		Role existingRole = getRoleById(id);
-		existingRole.setName( role.getName() );
+		existingRole.setName( role.getName().toUpperCase() );
 		existingRole.setDescription( role.getDescription() );
 		return roleRepository.save(existingRole);
 	}

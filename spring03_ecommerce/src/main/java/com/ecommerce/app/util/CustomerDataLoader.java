@@ -6,12 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.ecommerce.app.model.Customer;
 import com.ecommerce.app.repository.CustomerRepository;
-import com.ecommerce.app.service.CustomerService;
+
 
 /**
 * CommandLineRunner es una interfaz en Spring Boot que se 
@@ -26,6 +27,7 @@ import com.ecommerce.app.service.CustomerService;
 */
 @Component
 @Order(1)
+@Profile("loaderH2") // Para que se active cuando se use el perfil indicado
 public class CustomerDataLoader implements CommandLineRunner {
 	
 	@Autowired
