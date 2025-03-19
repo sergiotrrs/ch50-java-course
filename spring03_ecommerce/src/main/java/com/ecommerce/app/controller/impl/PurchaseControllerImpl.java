@@ -50,7 +50,7 @@ public class PurchaseControllerImpl implements PurchaseController {
 
 	@Override
 	@DeleteMapping("{id}")
-	public ResponseEntity<Void> deletePurchase(Long id) {
+	public ResponseEntity<Void> deletePurchase(@PathVariable("id") Long id) {
 		purchaseService.deletePurchase(id); 
 		return ResponseEntity.noContent().build();
 	}

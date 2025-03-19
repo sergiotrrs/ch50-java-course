@@ -28,8 +28,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product getProductById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return productRepository.findById(id).orElseThrow( ()-> new IllegalStateException("Product does not exist with id " + id));
 	}
 
 	@Override

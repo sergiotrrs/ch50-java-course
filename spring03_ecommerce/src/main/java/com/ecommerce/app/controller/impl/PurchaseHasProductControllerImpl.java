@@ -52,16 +52,26 @@ public class PurchaseHasProductControllerImpl implements PurchaseHasProductContr
 	}
 
 	@Override
-	public ResponseEntity<PurchaseHasProduct> updatePurchaseHasProduct(PurchaseHasProduct purchaseHasProducts,
-			Long purchaseId, Long productId) {
-		// TODO Auto-generated method stub
-		return null;
+	@PutMapping("/query") // localhost:8080/api/v1/purchases-has-products/query?purchaseId=1&productId=3 
+	public ResponseEntity<PurchaseHasProduct> updatePurchaseHasProduct(
+			@RequestBody PurchaseHasProduct purchaseHasProducts,
+			@RequestParam(name = "purchaseId") Long purchaseId,
+			@RequestParam(name = "productId") Long productId
+			) {
+		PurchaseHasProduct existingPurchaseHasProducts = puHprService
+				.updatePurchaseHasProductByCompositeId(purchaseHasProducts, purchaseId, productId);
+		return ResponseEntity.ok(existingPurchaseHasProducts); 
 	}
 
 	@Override
-	public ResponseEntity<Void> deletePurchaseHasProductByCompositeId(Long purchaseId, Long productId) {
-		// TODO Auto-generated method stub
-		return null;
+	@DeleteMapping("/query") // localhost:8080/api/v1/purchases-has-products/query?purchaseId=1&productId=3 
+	public ResponseEntity<Void> deletePurchaseHasProductByCompositeId(
+			@RequestParam(name = "purchaseId") Long purchaseId,
+			@RequestParam(name = "productId") Long productId
+			) { 
+		puHprService
+		.deletePurchaseHasProductByCompositeId(purchaseId, productId);
+		return ResponseEntity.noContent().build();
 	}
 
 }

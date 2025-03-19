@@ -62,6 +62,7 @@ public class GlobalExceptionHandler {
 	    errorDetails.setMessage(exception.getMessage());
 	    errorDetails.setPath(webRequest.getDescription(false));
 	    errorDetails.setErrorCode("Internal Server Error ^^' ");
+	    exception.printStackTrace();
 
 	    return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR); // Status code 500
 	}
