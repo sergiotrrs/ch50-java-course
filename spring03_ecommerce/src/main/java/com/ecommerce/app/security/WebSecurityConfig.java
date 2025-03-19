@@ -2,6 +2,7 @@ package com.ecommerce.app.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -62,11 +63,29 @@ public class WebSecurityConfig {
 	
 	
 	// STEP 2 Realizar configuraciones personalizadas del filter chain
+	@Bean
 	SecurityFilterChain filterChain( HttpSecurity http) throws Exception {
 		
 		// STEP 2.1 permitir las solicitud sin auutenticar usuarios
-		return http
+		/*return http
 				.authorizeHttpRequests( authorize -> authorize.anyRequest().permitAll() )
+				.csrf( csrf-> csrf.disable() )
+				.httpBasic( withDefaults() ) 
+				.build();*/
+		
+		// STEP 2.2 Personalizar la seguridad en los endpoints
+		return http
+				.authorizeHttpRequests( authorize -> authorize
+						.requestMatchers("/", "index.html", "/assets/**").permitAll()
+						.requestMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
+						.requestMatchers(HttpMethod.GET, "/api/v1/products","/api/v1/products/**").permitAll()
+						.requestMatchers("/api/v1/users", "/api/v1/roles/**").hasRole("ADMIN")
+						.requestMatchers("/api/v1/users/**",
+										"/api/v1/purchases/**",
+										"/api/v1/order-has-products/**"
+								).hasAnyRole("ADMIN","CUSTOMER")
+						.anyRequest().authenticated()						
+						)
 				.csrf( csrf-> csrf.disable() )
 				.httpBasic( withDefaults() ) 
 				.build();
