@@ -86,7 +86,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer getCustomerById(Long id) {
 		Optional<Customer> optionalCustomer = customerRepository.findById(id);
-		if( optionalCustomer.isEmpty()) {
+		if( optionalCustomer.isEmpty() || !optionalCustomer.get().isActive() ) {
 			throw new IllegalStateException("Customer does not exist with id " + id);
 		}
 		Customer existingCustomer = optionalCustomer.get();
