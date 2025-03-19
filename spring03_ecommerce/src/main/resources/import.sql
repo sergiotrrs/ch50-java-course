@@ -9,3 +9,4 @@ INSERT INTO products(id, title, description, price) VALUES (8, 'Bicicleta Eléct
 INSERT INTO products(id, title, description, price) VALUES (9, 'Cámara', 'Cámara de aire para bicicleta', 300.45);
 INSERT INTO products(title, description, price) VALUES ('Luz Frontal', 'Luz LED para bicicleta', 250.00);
 INSERT INTO products(title, description, price) VALUES ('Reflector', 'Reflector trasero rojo para bicicleta', 180.35);
+

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.app.exception.MyCustomUncheckedException;
@@ -49,6 +50,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	private final CustomerRepository customerRepository;
 	private final RoleService roleService;
+	private final PasswordEncoder passwordEncoder;
 	
 	/**
 	 * En spring Boot se puede inyectar dependencia s de dos formas:
@@ -58,9 +60,11 @@ public class CustomerServiceImpl implements CustomerService {
 	 *   usar Autowired es opcional.
 	 *   Ventajas: Facilita la prueba unitaria y permite objetos inmutables.
 	 */
-	public CustomerServiceImpl(CustomerRepository customerRepository, RoleService roleService) {
+	public CustomerServiceImpl(CustomerRepository customerRepository, RoleService roleService,
+			PasswordEncoder passwordEncoder) {
 		this.customerRepository = customerRepository;
 		this.roleService = roleService;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
@@ -74,6 +78,8 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setId(null); // forzar la creación del cliente	
 		customer.setActive(true); // activar cliente
 		customer.setCreatedAt(LocalDateTime.now());
+		// TODO encriptar el password
+		customer.setPassword( passwordEncoder.encode( customer.getPassword() ) );
 		Customer newCustomer = customerRepository.save( customer );
 		return newCustomer;
 	}
