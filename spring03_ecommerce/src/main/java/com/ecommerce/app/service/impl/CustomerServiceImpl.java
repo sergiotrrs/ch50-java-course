@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.ecommerce.app.exception.MyCustomUncheckedException;
 import com.ecommerce.app.model.Customer;
 import com.ecommerce.app.model.Role;
 import com.ecommerce.app.repository.CustomerRepository;
@@ -66,7 +67,8 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer createCustomer(Customer customer) {
 		Optional<Customer> optionalCustomer = customerRepository.findByEmail(customer.getEmail());
 		if( optionalCustomer.isPresent()) {
-			throw new IllegalStateException("Customer already exist with email " + customer.getEmail());
+			//throw new IllegalStateException("Customer already exist with email " + customer.getEmail());
+			throw new MyCustomUncheckedException("Customer already exist with email " + customer.getEmail());
 		}
 		// TODO Verificar si los atributos son válidos
 		customer.setId(null); // forzar la creación del cliente	
