@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
 
 /**
 * @EnableWebSecurity: habilita la configuración de seguridad web 
@@ -78,11 +79,13 @@ public class WebSecurityConfig {
 		// STEP 2.2 Personalizar la seguridad en los endpoints
 		return http
 				.authorizeHttpRequests( authorize -> authorize
-						.requestMatchers("/", "index.html", "/assets/**").permitAll()
+						.requestMatchers("/", "/index.html", "/assets/**").permitAll()
 						.requestMatchers(HttpMethod.POST, "/api/v1/customers").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/v1/products","/api/v1/products/**").permitAll()
 						.requestMatchers(HttpMethod.GET,
-								"/api/v1/customers/**", 
+								"/api/v1/customers/{id}"
+								).access(new WebExpressionAuthorizationManager("(T(java.lang.Long).valueOf(#id) == authentication.principal.id and hasRole('CUSTOMER')) or hasRole('ADMIN')"))
+						.requestMatchers(HttpMethod.GET,
 								"/api/v1/purchases/**",
 								"/api/v1/purchases-has-products/**"
 								).hasRole("CUSTOMER")
@@ -91,12 +94,12 @@ public class WebSecurityConfig {
 								"/api/v1/purchases-has-products"
 								).hasRole("CUSTOMER")
 						.requestMatchers(
-						         "/api/v1/customers/**", 
-								 "/api/v1/roles/**", 
-								 "api/v1/purchases/**",
-								 "/api/v1/purchases-has-products/**",
-								 "/api/v1/products/**"
-								 ).hasRole("ADMIN")
+								"/api/v1/customers/**", 
+								"/api/v1/roles/**", 
+								"/api/v1/purchases/**",
+								"/api/v1/purchases-has-products/**",
+								"/api/v1/products/**"
+								).hasRole("ADMIN")
 						.anyRequest().authenticated()						
 						)
 				.csrf( csrf-> csrf.disable() )
