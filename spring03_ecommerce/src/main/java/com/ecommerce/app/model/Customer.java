@@ -7,6 +7,7 @@ import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -59,7 +60,7 @@ public class Customer {
      * - La columna "role_id" en la tabla intermedia 
      *   referencia a la entidad Role.
      */
-	@ManyToMany() // Indica la relación entre tablas
+	@ManyToMany(fetch = FetchType.EAGER) // Indica la relación entre tablas
 	@JoinTable( // Define la tabla intermedia
 			name="customer_has_role", // nombre de tabla intermedia
 			joinColumns = @JoinColumn(name = "customer_id"),

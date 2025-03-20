@@ -81,11 +81,22 @@ public class WebSecurityConfig {
 						.requestMatchers("/", "index.html", "/assets/**").permitAll()
 						.requestMatchers(HttpMethod.POST, "/api/v1/customers").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/v1/products","/api/v1/products/**").permitAll()
-						.requestMatchers("/api/v1/customers", "/api/v1/roles/**").hasRole("ADMIN")
-						.requestMatchers("/api/v1/customers/**",
-										"/api/v1/purchases/**",
-										"/api/v1/order-has-products/**"
-								).hasAnyRole("ADMIN","CUSTOMER")
+						.requestMatchers(HttpMethod.GET,
+								"/api/v1/customers/**", 
+								"/api/v1/purchases/**",
+								"/api/v1/purchases-has-products/**"
+								).hasRole("CUSTOMER")
+						.requestMatchers(HttpMethod.POST, 
+								"/api/v1/purchases",
+								"/api/v1/purchases-has-products"
+								).hasRole("CUSTOMER")
+						.requestMatchers(
+						         "/api/v1/customers/**", 
+								 "/api/v1/roles/**", 
+								 "api/v1/purchases/**",
+								 "/api/v1/purchases-has-products/**",
+								 "/api/v1/products/**"
+								 ).hasRole("ADMIN")
 						.anyRequest().authenticated()						
 						)
 				.csrf( csrf-> csrf.disable() )
